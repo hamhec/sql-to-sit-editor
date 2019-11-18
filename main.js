@@ -8,6 +8,7 @@ function createWindow() {
         width: 600,
         height: 600,
         backgroundColor: '#ffffff',
+        autoHideMenuBar: true
     });
 
     win.loadURL(`file://${__dirname}/dist/sql-to-sit-editor/index.html`);
