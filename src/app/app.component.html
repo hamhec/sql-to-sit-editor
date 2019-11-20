@@ -23,12 +23,13 @@
           <mat-icon>wrap_text</mat-icon>
         </button>
         <button mat-icon-button aria-label="Import from file" matTooltip="Import from file"
-          (click)="file">
+          (click)="fileImportFirstEditor.click()">
           <mat-icon>attach_file</mat-icon>
-          <input #fileImportEditor1 type="file" style="display:none;">
+          <input #fileImportFirstEditor type="file" (change)="onImportFromFile($event, firstCodeEditor)"
+            style="display:none;">
         </button>
         <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
-          (click)="onClearContent(secondCodeEditor)">
+          (click)="onExportToFile(secondCodeEditor)">
           <mat-icon>cloud_download</mat-icon>
         </button>
       </mat-toolbar>
@@ -59,11 +60,13 @@
           <mat-icon>wrap_text</mat-icon>
         </button>
         <button mat-icon-button aria-label="Import from file" matTooltip="Import from file"
-          (click)="onClearContent(secondCodeEditor)">
+          (click)="fileImportSecondEditor.click()">
           <mat-icon>attach_file</mat-icon>
+          <input #fileImportSecondEditor type="file" (change)="onImportFromFile($event, secondCodeEditor)"
+            style="display:none;">
         </button>
         <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
-          (click)="onClearContent(secondCodeEditor)">
+          (click)="onExportToFile(secondCodeEditor)">
           <mat-icon>cloud_download</mat-icon>
         </button>
       </mat-toolbar>
@@ -123,12 +126,18 @@
           (click)="onWrapContent(outputCodeEditor)">
           <mat-icon>wrap_text</mat-icon>
         </button>
+        <button mat-icon-button aria-label="Copy text" matTooltip="Copy Text"
+          (click)="onCopyContent(outputCodeEditor)">
+          <mat-icon>file_copy</mat-icon>
+        </button>
         <button mat-icon-button aria-label="Import from file" matTooltip="Import from file"
-          (click)="onClearContent(secondCodeEditor)">
+          (click)="fileImportOutputEditor.click()">
           <mat-icon>attach_file</mat-icon>
+          <input #fileImportOutputEditor type="file" (change)="onImportFromFile($event, outputCodeEditor)"
+            style="display:none;">
         </button>
         <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
-          (click)="onClearContent(secondCodeEditor)">
+          (click)="onExportToFile(outputCodeEditor)">
           <mat-icon>cloud_download</mat-icon>
         </button>
         <!-- <button mat-icon-button aria-label="Clear" matTooltip="Clear editor content"

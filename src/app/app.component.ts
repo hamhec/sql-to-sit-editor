@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Query } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
+// import {dialog} from 'electron';
+
 import sqlFormatter from 'sql-formatter';
 import * as sqlParser from 'js-tsql-parser';
 
@@ -91,6 +93,35 @@ export class AppComponent {
   public onWrapContent(editor: ace.Ace.Editor) {
     let wrap = editor.getSession().getUseWrapMode();
     editor.getSession().setUseWrapMode(!wrap);
+  }
+
+  public onCopyContent(editor: ace.Ace.Editor) {
+    var selection = editor.selection.toJSON(); // save selection
+    editor.selectAll();
+    editor.focus();
+    document.execCommand('copy');
+    editor.selection.fromJSON(selection); // restore selection
+  }
+
+  onImportFromFile($event, editor: ace.Ace.Editor) {
+    if(!$event.srcElement.value) return;
+    let file = $event.srcElement.files[0];
+    let reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = (data) => {
+      let txt = reader.result.toString();
+      editor.setValue(txt, 1);
+      $event.srcElement.value = null;
+    }
+  }
+
+  onExportToFile(editor: ace.Ace.Editor) {
+    // const data = editor.getValue();  
+    // const options = {
+    //   title: "Save file",
+    //   buttonLabel: "Save",
+    // }
+    // let filename = dialog.showSaveDialogSync(options);
   }
 
   generateSIT() {
