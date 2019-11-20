@@ -5,15 +5,15 @@ let win;
 function createWindow() {
     // Create the browser window
     win = new BrowserWindow({
-        width: 600,
+        width: 980,
         height: 600,
         backgroundColor: '#ffffff',
-        autoHideMenuBar: true
     });
 
     win.loadURL(`file://${__dirname}/dist/sql-to-sit-editor/index.html`);
 
     win.on('closed', function() {
+        // set win to null to avoid memory leak on close.
         win = null;
     })
 }
@@ -28,7 +28,7 @@ app.on('window-all-closed', function() {
 });
 
 app.on('activate', function() {
-    // macOS specific close
+    // macOS specific open if the dock icon is clicked
     if(win === null) {
         createWindow();
     }

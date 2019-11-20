@@ -1,1 +1,144 @@
-<div class="code-editor" #codeEditor></div>
+<div class="main-container">
+  <div class="input-container">
+    <div class="db-container">
+      <mat-toolbar color="primary" class="toolbar-db">
+        <span>ODS Name</span>
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="SITRepresentation.ODS.DBName">
+        </mat-form-field>
+        <button mat-icon-button aria-label="Undo" matTooltip="Undo"
+          (click)="onUndo(firstCodeEditor)">
+          <mat-icon>undo</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Redo" matTooltip="Redo"
+          (click)="onRedo(firstCodeEditor)">
+          <mat-icon>redo</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Format" matTooltip="Fromat SQL"
+          (click)="onBeautifyContent(firstCodeEditor)">
+          <mat-icon>format_align_left</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Wrap text" matTooltip="Toggle text wrap"
+          (click)="onWrapContent(firstCodeEditor)">
+          <mat-icon>wrap_text</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Import from file" matTooltip="Import from file"
+          (click)="file">
+          <mat-icon>attach_file</mat-icon>
+          <input #fileImportEditor1 type="file" style="display:none;">
+        </button>
+        <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
+          (click)="onClearContent(secondCodeEditor)">
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div class="code-editor">
+        <div id="first-code-editor" #codeEditor1></div>
+      </div>
+    </div>
+    <div class="db-container">
+      <mat-toolbar color="primary" class="toolbar-db">
+        <span>DW Name</span>
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="SITRepresentation.DW.DBName">
+        </mat-form-field>
+        <button mat-icon-button aria-label="Undo" matTooltip="Undo"
+          (click)="onUndo(secondCodeEditor)">
+          <mat-icon>undo</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Redo" matTooltip="Redo"
+          (click)="onRedo(secondCodeEditor)">
+          <mat-icon>redo</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Format" matTooltip="Fromat SQL"
+          (click)="onBeautifyContent(secondCodeEditor)">
+          <mat-icon>format_align_left</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Wrap text" matTooltip="Toggle text wrap"
+          (click)="onWrapContent(secondCodeEditor)">
+          <mat-icon>wrap_text</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Import from file" matTooltip="Import from file"
+          (click)="onClearContent(secondCodeEditor)">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
+          (click)="onClearContent(secondCodeEditor)">
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div class="code-editor">
+        <div id="second-code-editor" #codeEditor2></div>
+      </div>
+    </div>
+    <div class="others-container">
+
+    </div>
+  </div>
+
+
+  <div class="inbetween-container">
+  </div>
+
+
+  <div class="output-container">
+    <div class="table-indicator-container">
+      <!-- <mat-form-field appearance="standard">
+        <mat-label>Table Name</mat-label>
+        <input matInput [(ngModel)]="SITRepresentation.table">
+      </mat-form-field> -->
+      <mat-form-field appearance="standard">
+        <mat-label>Validation Indicator</mat-label>
+        <input matInput [(ngModel)]="SITRepresentation.validationIndicator">
+      </mat-form-field>
+    </div>
+    <!-- <mat-form-field appearance="standard">
+      <mat-label>Output Fields</mat-label>
+      <input matInput [(ngModel)]="SITRepresentation.fields">
+    </mat-form-field> -->
+
+    <div class="buttons">
+      <button mat-flat-button color="primary" (click)="generateSIT()">
+        <span>Generate SIT</span>
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button mat-flat-button color="primary">
+        <span>Generate From SIT</span>
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </div>
+    <div class="db-container">
+      <mat-toolbar color="primary" class="toolbar-db">
+        <span>Generated SIT</span>
+
+        <button mat-icon-button aria-label="Undo" matTooltip="Undo"
+          (click)="onUndo(outputCodeEditor)">
+          <mat-icon>undo</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Redo" matTooltip="Redo"
+          (click)="onRedo(outputCodeEditor)">
+          <mat-icon>redo</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Wrap text" matTooltip="Toggle text wrap"
+          (click)="onWrapContent(outputCodeEditor)">
+          <mat-icon>wrap_text</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Import from file" matTooltip="Import from file"
+          (click)="onClearContent(secondCodeEditor)">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
+          (click)="onClearContent(secondCodeEditor)">
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+        <!-- <button mat-icon-button aria-label="Clear" matTooltip="Clear editor content"
+          (click)="onClearContent(outputCodeEditor)">
+          <mat-icon>clear</mat-icon>
+        </button> -->
+      </mat-toolbar>
+      <div class="code-editor">
+        <div id="output-code-editor" #codeEditor3></div>
+      </div>
+    </div>
+  </div>
+</div>
