@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Query } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-// import {dialog} from 'electron';
+import { ElectronService } from 'ngx-electron';
+import { FsService } from 'ngx-fs';
 
 import sqlFormatter from 'sql-formatter';
 import * as sqlParser from 'js-tsql-parser';
@@ -15,6 +16,7 @@ import 'ace-builds/src-noconflict/theme-sqlserver';
 
 import { SITRepresentation } from './models/SITRepresentation';
 import { ErrorDialogComponent } from './errors/error-dialog/error-dialog.component';
+import { FileService } from './services/file.service';
 
 const THEME = 'ace/theme/sqlserver';
 const LANG = 'ace/mode/sql';
@@ -35,7 +37,7 @@ export class AppComponent {
 
   public SITRepresentation = new SITRepresentation();
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog, private fs: FsService, private elec: ElectronService) {}
 
   ngOnInit() {
     ace.require('ace/ext/language_tools');
@@ -115,13 +117,20 @@ export class AppComponent {
     }
   }
 
-  onExportToFile(editor: ace.Ace.Editor) {
-    // const data = editor.getValue();  
-    // const options = {
-    //   title: "Save file",
-    //   buttonLabel: "Save",
-    // }
-    // let filename = dialog.showSaveDialogSync(options);
+  async onExportToFile(editor: ace.Ace.Editor, name: string) {
+    const defaultPath = `~/${name}`;
+    const data = editor.getValue();  
+    console.log(defaultPath);
+    console.log(data);
+    const options = {
+      title: "Save file",
+      buttonLabel: "Save",
+      defaultPath
+    }
+    let {filePath} = await this.elec.remote.dialog.showSaveDialog(options);
+      (<any>this.fs.fs).writeFile(filePath, data, e => {
+        console.log(e);
+      });
   }
 
   generateSIT() {

@@ -1,4 +1,6 @@
-const { app, BrowserWindow} = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+
+const fs = require('fs');
 
 let win;
 
@@ -8,6 +10,7 @@ function createWindow() {
         width: 980,
         height: 600,
         backgroundColor: '#ffffff',
+        webPreferences: { nodeIntegration: true }
     });
 
     win.loadURL(`file://${__dirname}/dist/sql-to-sit-editor/index.html`);
@@ -17,6 +20,11 @@ function createWindow() {
         win = null;
     })
 }
+
+ipcMain.on("getFiles", (event, arg) => {
+    const files = fs.readdirSync(__dirname);
+    win.webContents.send("getFilesResponse", files);
+});
 
 app.on('ready', createWindow);
 

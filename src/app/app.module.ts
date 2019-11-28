@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule,
          MatIconModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 
+import { NgxElectronModule } from 'ngx-electron';
+import { NgxFsModule } from 'ngx-fs';
+
 import { AppComponent } from './app.component';
 import { ErrorDialogComponent } from './errors/error-dialog/error-dialog.component';
 
@@ -19,6 +22,8 @@ import { ErrorDialogComponent } from './errors/error-dialog/error-dialog.compone
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    NgxElectronModule,
+    NgxFsModule,
     MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule,
     MatIconModule, MatTooltipModule, MatDialogModule
   ],

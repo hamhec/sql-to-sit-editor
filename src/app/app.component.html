@@ -29,7 +29,7 @@
             style="display:none;">
         </button>
         <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
-          (click)="onExportToFile(secondCodeEditor)">
+          (click)="onExportToFile(firstCodeEditor, 'R_ODS.sql')">
           <mat-icon>cloud_download</mat-icon>
         </button>
       </mat-toolbar>
@@ -66,7 +66,7 @@
             style="display:none;">
         </button>
         <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
-          (click)="onExportToFile(secondCodeEditor)">
+          (click)="onExportToFile(secondCodeEditor, 'R_DW.sql')">
           <mat-icon>cloud_download</mat-icon>
         </button>
       </mat-toolbar>
@@ -105,7 +105,7 @@
         <span>Generate SIT</span>
         <mat-icon>arrow_downward</mat-icon>
       </button>
-      <button mat-flat-button color="primary">
+      <button mat-flat-button color="primary" disabled>
         <span>Generate From SIT</span>
         <mat-icon>arrow_upward</mat-icon>
       </button>
@@ -137,7 +137,7 @@
             style="display:none;">
         </button>
         <button mat-icon-button aria-label="Export to file" matTooltip="Export to file"
-          (click)="onExportToFile(outputCodeEditor)">
+          (click)="onExportToFile(outputCodeEditor, 'SIT.csv')">
           <mat-icon>cloud_download</mat-icon>
         </button>
         <!-- <button mat-icon-button aria-label="Clear" matTooltip="Clear editor content"
