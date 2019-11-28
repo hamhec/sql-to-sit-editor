@@ -65,7 +65,7 @@ export class AppComponent {
 
     const extraEditorOptions = {
       // Set autocompletion to false because it slows down the app
-      enableLiveAutocompletion: false
+      enableLiveAutocompletion: true
     };
     return Object.assign(basicEditorOptions, extraEditorOptions);
   }
@@ -127,7 +127,7 @@ export class AppComponent {
   generateSIT() {
     let ODScode = this.firstCodeEditor.getValue();
     try {
-      sqlParser.parse(ODScode);
+      // sqlParser.parse(ODScode);
       this.SITRepresentation.ODS.initialize(ODScode);
     } catch (e) {
       console.log(e);
@@ -141,7 +141,7 @@ export class AppComponent {
 
     let DWcode = this.secondCodeEditor.getValue();
     try{
-      sqlParser.parse(DWcode);
+      // sqlParser.parse(DWcode);
       this.SITRepresentation.DW.initialize(DWcode);
     } catch (e) {
       console.log(e);

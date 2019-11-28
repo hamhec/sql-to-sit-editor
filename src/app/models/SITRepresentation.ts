@@ -13,7 +13,8 @@ export class SITRepresentation {
     }
 
     public generateTableName(): void {
-        this.table = this.DW.sqlString.match(/(?<=from )\b.+?\b/i)[0];
+        const matches = this.DW.sqlString.match(/(?<=from )\b.+?\b/i);
+        this.table = (matches) ? matches[0]: undefined;
     }
 
     public generateFields(): void {
@@ -25,7 +26,7 @@ export class SITRepresentation {
             let field = (col.alias) ? col.alias : col.name;
             fields += `;${field}`;
         }
-        this.fields = fields;
+        this.fields = `${fields};ODS_present;DWH_present;valid`;
     }
 
     public generateSITString(): string {

@@ -2,9 +2,19 @@ export const removeLineBreaks = (str: string): string => {
     return str.replace(/(\r\n|\n|\r)/gm, " ");
 }
 
+export const removeUnnecessaryWhiteSpaces = (str: string): string => {
+    str = str.replace(/[\t]+/g, " "); // replace tabs with white space
+    str = str.replace(/[ ]+/g, " "); // remove successive white spaces;
+    return str.trim();
+}
+
 export const containsAsKeyword = (str: string): boolean => {
-    const regex = RegExp(/^(as$|as )/i);
+    const regex = RegExp(/(^as$|^as | as )/i);
     return regex.test(str);
+}
+
+export const splitOnASKeyword = (str: string): string[] => {
+    return str.split(/( as )/);
 }
 
 export const isComment = (str:string): boolean => {
@@ -17,7 +27,8 @@ export const cleanComment = (str: string): string => {
 }
 
 export const extractComments = (str:string): string[] => {
-    return str.match(/\/\*.*?\*\//g);
+    const matches = str.match(/\/\*.*?\*\//g);
+    return (matches) ? matches: [];
 }
 
 export const removeComments = (str:string): string => {
