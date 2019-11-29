@@ -13,7 +13,8 @@
     "electron-build": "ng build --prod",
     "electron-run": "npm run electron-build && npm run electron",
     "dist": "electron-builder",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "gh-pages": "ng build --prod --base-href='https://hamhec.github.io/sql-to-sit-editor/' --prod && npx ngh --dir=dist/sql-to-sit-editor"
   },
   "private": true,
   "dependencies": {
@@ -46,6 +47,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "@types/node-sql-parser": "^1.1.0",
+    "angular-cli-ghpages": "^0.6.0",
     "codelyzer": "^5.0.0",
     "electron": "^7.1.1",
     "electron-builder": "^21.2.0",
