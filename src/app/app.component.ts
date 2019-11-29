@@ -17,6 +17,7 @@ import 'ace-builds/src-noconflict/theme-sqlserver';
 import { SITRepresentation } from './models/SITRepresentation';
 import { ErrorDialogComponent } from './errors/error-dialog/error-dialog.component';
 import { FileService } from './services/file.service';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 
 const THEME = 'ace/theme/sqlserver';
 const LANG = 'ace/mode/sql';
@@ -136,7 +137,6 @@ export class AppComponent {
   generateSIT() {
     let ODScode = this.firstCodeEditor.getValue();
     try {
-      // sqlParser.parse(ODScode);
       this.SITRepresentation.ODS.initialize(ODScode);
     } catch (e) {
       console.log(e);
@@ -149,16 +149,23 @@ export class AppComponent {
     }
 
     let DWcode = this.secondCodeEditor.getValue();
-    try{
-      // sqlParser.parse(DWcode);
-      this.SITRepresentation.DW.initialize(DWcode);
-    } catch (e) {
-      console.log(e);
-      if(e instanceof TypeError || e instanceof ReferenceError) {
-        this.showError("Warning! SQL Error in DW query", 
-          "The SQL query is valid. However, it does not follow the syntax agreed upon.\n Please check the columns in the first SELECT.");
-      } else {
-        this.showError("Warning! SQL Error in DW query", e.message);
+    // Generate DWcode if it has not been set
+    if(DWcode == "") {
+      this.SITRepresentation.generateDWFromODS();
+      this.secondCodeEditor.setValue(sqlFormatter.format(this.SITRepresentation.DW.sqlString), 1);
+      
+    } else {
+      try{
+        // sqlParser.parse(DWcode);
+        this.SITRepresentation.DW.initialize(DWcode);
+      } catch (e) {
+        console.log(e);
+        if(e instanceof TypeError || e instanceof ReferenceError) {
+          this.showError("Warning! SQL Error in DW query", 
+            "The SQL query does not follow the syntax agreed upon.\n Please check the help section.");
+        } else {
+          this.showError("Warning! SQL Error in DW query", e.message);
+        }
       }
     }
 
@@ -176,5 +183,10 @@ export class AppComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {title, message};
     this.matDialog.open(ErrorDialogComponent, dialogConfig);
+  }
+
+  openHelp() {
+    const dialogConfig = new MatDialogConfig();
+    this.matDialog.open(HelpDialogComponent, dialogConfig);
   }
 }

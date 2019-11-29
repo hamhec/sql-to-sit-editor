@@ -10,11 +10,30 @@ export class SITRepresentation {
     constructor() {
         this.ODS = new SQLQueryRepresentation("R_ODS");
         this.DW = new SQLQueryRepresentation("R_DW");
+        this.validationIndicator = "is_present";
+    }
+
+    public generateDWFromODS() {
+        this.DW.columns = [];
+        this.DW.indicators = [];
+        for(let i = 0; i < this.ODS.columns.length; i++) {
+            const col = this.ODS.columns[i];
+            this.DW.columns.push({ name: col.alias, alias: col.alias, isIndicator: false});
+        }
+        for(let i = 0; i < this.ODS.indicators.length; i++) {
+            const col = this.ODS.indicators[i];
+            this.DW.indicators.push( { name: col.alias, alias: col.alias, isIndicator: true});
+        }
+        this.DW.generateSQLFromColumnsAndIndicators(this.table);
     }
 
     public generateTableName(): void {
-        const matches = this.DW.sqlString.match(/(?<=from )\b.+?\b/i);
-        this.table = (matches) ? matches[0]: undefined;
+        console.log(this.table);
+        console.log(this.DW.sqlString);
+        if(!this.table || this.table.trim() == "") {
+          const matches = this.DW.sqlString.match(/(?<=from )\b.+?(\b|$)/im);
+          this.table = (matches) ? matches[0]: undefined;
+        }
     }
 
     public generateFields(): void {
@@ -38,7 +57,7 @@ export class SITRepresentation {
         }
         if(this.DW.sqlString && this.DW.sqlString.length > 0 && this.DW.columns){
             this.generateTableName();
-            str += this.ODS.toSITQuery();
+            str += this.DW.toSITQuery();
             str += '\n';
         }
         str += `table!${this.table}\n`;

@@ -14,7 +14,7 @@ export const containsAsKeyword = (str: string): boolean => {
 }
 
 export const splitOnASKeyword = (str: string): string[] => {
-    return str.split(/( as )/);
+    return str.split(/( as )/i);
 }
 
 export const isComment = (str:string): boolean => {

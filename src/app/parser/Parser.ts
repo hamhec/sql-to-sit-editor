@@ -18,6 +18,8 @@ export const cleanSQLString = (str: string): string => {
     result = Helper.removeComments(result);
     // remove ; at the end of the query
     result = result.replace(/;[ ]*$/, "");
+    // remove white spaces;
+    result = Helper.removeUnnecessaryWhiteSpaces(result);
     return result;
 }
 

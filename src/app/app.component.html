@@ -86,10 +86,10 @@
 
   <div class="output-container">
     <div class="table-indicator-container">
-      <!-- <mat-form-field appearance="standard">
+      <mat-form-field appearance="standard">
         <mat-label>Table Name</mat-label>
         <input matInput [(ngModel)]="SITRepresentation.table">
-      </mat-form-field> -->
+      </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>Validation Indicator</mat-label>
         <input matInput [(ngModel)]="SITRepresentation.validationIndicator">
@@ -105,9 +105,8 @@
         <span>Generate SIT</span>
         <mat-icon>arrow_downward</mat-icon>
       </button>
-      <button mat-flat-button color="primary" disabled>
-        <span>Generate From SIT</span>
-        <mat-icon>arrow_upward</mat-icon>
+      <button mat-flat-button color="primary" (click)="openHelp()">
+        <span>Help</span>
       </button>
     </div>
     <div class="db-container">

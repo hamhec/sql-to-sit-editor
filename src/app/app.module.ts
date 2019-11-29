@@ -12,11 +12,13 @@ import { NgxFsModule } from 'ngx-fs';
 
 import { AppComponent } from './app.component';
 import { ErrorDialogComponent } from './errors/error-dialog/error-dialog.component';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    HelpDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,6 @@ import { ErrorDialogComponent } from './errors/error-dialog/error-dialog.compone
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorDialogComponent]
+  entryComponents: [ErrorDialogComponent, HelpDialogComponent]
 })
 export class AppModule { }

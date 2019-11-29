@@ -14,7 +14,7 @@
     "electron-run": "npm run electron-build && npm run electron",
     "dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps",
-    "gh-pages": "ng build --prod --base-href='https://hamhec.github.io/sql-to-sit-editor/' --prod && npx ngh --dir=dist/sql-to-sit-editor"
+    "gh-pages": "ng build --prod --base-href=https://hamhec.github.io/sql-to-sit-editor/ --prod && ngh --dir=dist/sql-to-sit-editor"
   },
   "private": true,
   "dependencies": {
