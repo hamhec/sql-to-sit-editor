@@ -5,8 +5,21 @@
 
     <h3>ODS SQL Query Requirements</h3>
     <ul>
-        <li>Every column in the main SELECT must have an alias.</li>
+        <li>Every column in the main (first) SELECT <strong>must</strong> have an alias.</li>
+        <li>Preface the first indicator column by --#! (Check the following example)</li>
     </ul>
 
     <h3>How this tool works?</h3>
+    <ol>
+        <li>The input is: <strong>ODS Query</strong>, <strong>DW table name</strong>, and the <strong>validation indicator</strong>.</li>
+        <li>Extract from the main SELECT of the ODS query the columns (with their aliases).</li>
+        <li>Generate the DW query from the ODS columns' aliases and DW table name (if the DW query is not indicated by the user).</li>
+    </ol>
+
+    <h3>Example</h3>
+    <code>
+        SELECT FROM
+
+    </code>
+
 </mat-dialog-content>
